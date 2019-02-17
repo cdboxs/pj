@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "pages/login/index",
+    "pages/subject/index",
+    "pages/index/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#3682f4",
+    "navigationBarTitleText": "评教系统",
+    "navigationBarTextStyle": "white"
+  }
+}

@@ -1,0 +1,72 @@
+/* pages/subject/index.wxss */
+.show{
+  display: block;
+}
+.teacher {
+  width: 100%;
+  height: 100rpx;
+  color: #555;
+  display: flex;
+  padding: 0 25rpx;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: 30rpx;
+  background: #fff;
+  border-bottom: 10rpx solid #ddd;
+}
+
+.subject {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: flex-start;
+  box-sizing: border-box;
+  padding-top: 68rpx;
+}
+
+.subjectList {
+  width: 90%;
+  padding: 25rpx;
+  background: #fff;
+  margin: 0 auto;
+  display: none;
+  border-radius: 10rpx;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 5px 2px #eee;
+}
+.subjectList .title{
+  color:#555;
+  font-size: 32rpx;
+}
+.subjectList view{
+  color:#555;
+  margin:30rpx 0;
+  font-size: 30rpx;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.subjectList view text{
+  display: block;
+  width: 80%;
+}
+.nextPre{
+  width:100%;
+  height: 100rpx;
+  background:#3682f4;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;bottom:0;left:0;
+}
+.nextPre text{
+  display: block;
+  width: 33.33%;
+  color:#fff;
+  font-size: 30rpx;
+  text-align: center;
+}

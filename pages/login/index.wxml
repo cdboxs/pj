@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<image src='../img/loginbg.jpg' class='loginbg'></image>
+<form class='login' bindsubmit='login'>
+  <picker value="collegeKey" range='{{college}}' bindchange="collegeSwitch">
+    <view>
+      <icon class='icon iconfont icon-study'></icon>
+      <input type='text' name="college" value='{{college[collegeKey]}}' placeholder='请选择学院' disabled='true'></input>
+    </view>
+  </picker>
+  <view>
+    <icon class='icon iconfont icon-gerenxinxi'></icon>
+    <input type='text' name="userName" placeholder='请输入学号'></input>
+  </view>
+  <view>
+    <icon class='icon iconfont icon-suoding'></icon>
+    <input type='text' name="userPwd" password='true' placeholder='请输入学号'></input>
+  </view>
+  <button form-type='submit'>登录</button>
+</form>
+<view class='copyright'>河北新龙集团-河工软件学院-项目部</view>

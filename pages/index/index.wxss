@@ -1,0 +1,72 @@
+/* pages/package/selectClass/index.wxss */
+
+.swicthNav{
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+.swicthNav view{
+  width: 50%;
+  padding:30rpx 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  transition: all 0.5s ease-in-out;
+  border-bottom:1px solid #eee;
+}
+
+.swicthNav view text{
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 28rpx;
+}
+.swicthNav .active{
+   transition: all 0.5s ease-in-out;
+  width: 50%;
+  color:#0282f5;
+  border-bottom:1px solid #0282f5;
+}
+.teacherAssess{
+  width: 94%;
+  margin:0 auto;
+}
+.teacherAssess view{
+  width: 100%;
+  color:#fff;
+  margin:36rpx 0;
+  padding:33rpx 25rpx;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  box-sizing: border-box;
+  background: #3682f4;
+  border-radius: 9rpx;
+}
+.teacherAssess view text{
+  font-size: 30rpx;
+}
+.teacherAssess view.active{
+  color:#666;
+  background:#ddd;
+}
+
+.loginStatus{
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 27rpx;
+  height: 100rpx;
+  color:#333;
+  padding:0 30rpx;
+  box-sizing: border-box;
+  border-bottom:10rpx solid #eee;
+}
+.loginStatus text:last-child{
+  color: #3682f4;
+}
+
+
+

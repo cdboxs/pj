@@ -1,0 +1,42 @@
+<!--pages/package/selectClass/index.wxml-->
+
+<view class='swicthNav'>
+  <view data-navid="1" bindtap='clickNav' class="{{navId==1 ? 'active':'' }}">
+    <text>企业专业教师</text>
+  </view>
+  <view data-navid="2" bindtap='clickNav' class="{{navId==2 ? 'active':'' }}">
+    <text>企业引导师</text>
+  </view>
+</view>
+<view class='loginStatus'>
+  <text>[-蹦犇霸-]欢迎登陆</text>
+  <text>退出登录</text>
+</view>
+<view class='teacherAssess' wx:if="{{navId==1}}">
+  <view class='active'>
+    <text>王瑞江[linux操作系统]</text>
+    <text>已评教</text>
+  </view>
+  <view bindtap='linkSubJect'>
+    <text>孙伟光[java编程语言]</text>
+    <text>未评教</text>
+  </view>
+  <view bindtap='linkSubJect'>
+    <text>张艳芳[PHP编程语言]</text>
+    <text>未评教</text>
+  </view>
+</view>
+<view class='teacherAssess' wx:if="{{navId==2}}">
+  <view bindtap='linkSubJect'>
+    <text>鲁思壮[马克思主义]</text>
+    <text>已评教</text>
+  </view>
+  <view class='active'>
+    <text>袁静[大宋野史]</text>
+    <text>未评教</text>
+  </view>
+  <view bindtap='linkSubJect'>
+    <text>齐老师[就业指导]</text>
+    <text>未评教</text>
+  </view>
+</view>

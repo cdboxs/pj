@@ -1,0 +1,26 @@
+<!--pages/subject/index.wxml-->
+<view class='teacher'>
+  <text>孙伟光[java编程语言]</text>
+  <text>未评教</text>
+</view>
+<view class='subject' style='width:{{width}}px;height:{{height}}px;'>
+
+  <block wx:for="{{items}}" wx:key="key" wx:for-index="{{tKey}}" wx:for-item="tItem">
+    <view class='subjectList' style="display:{{tItem.tNum==tKey?'block':'none'}};">
+      <text class='title'>{{tItem.title}}</text>
+      <radio-group bindchange="checkT">
+        <view wx:for="{{tItem.tList}}" wx:key="key" wx:for-item="item">
+          <radio value="{{item.name}}" checked="{{item.checked}}" />
+          <text>{{item.name}}、{{item.value}}</text>
+        </view>
+      </radio-group>
+    </view>
+  </block>
+
+
+</view>
+<view class='nextPre'>
+  <text bindtap='prev'>上一题</text>
+  <text>{{tKey}}/{{items.length}}</text>
+  <text bindtap='next'>下一题</text>
+</view>
