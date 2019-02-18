@@ -11,6 +11,7 @@ Page({
    */
   data: {
     navId:1,
+   
   },
 
   /**
@@ -32,8 +33,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
-  
+    let userInfo=wx.getStorageSync('userInfo');
+    if (userInfo){that.setData({ u: userInfo})};
+    m.getTeacher({ did: userInfo.did, cid: userInfo.cid, types: 0, code: userInfo.code}).then((res)=>{
+      console.log(res);
+      if(res.data.code==200){
+        that.setData({
+          t:res.data.data
+        });
+      }
+      return m.getTeacher({ did: userInfo.did, cid: userInfo.cid, types: 1, code: userInfo.code });
+    }).then((res)=>{
+      if (res.data.code == 200) {
+        that.setData({
+          d: res.data.data
+        });
+      }
+    });
   },
 
   /**
@@ -70,14 +86,23 @@ Page({
   onShareAppMessage: function () {
 
   },
+  loginout(){
+    m.showLoading('正在退出');
+    wx.clearStorage();
+    setTimeout(()=>{
+      wx.reLaunch({
+        url: '../login/index',
+      })
+    },1200);
+  },
   clickNav(e){
     that.setData({
       navId: e.currentTarget.dataset.navid
     });
   },
-  linkSubJect(){
+  linkSubJect(e){
     wx.navigateTo({
-      url: '../subject/index',
+      url: '../subject/index?types=' + e.currentTarget.dataset.types + '&tname=' + e.currentTarget.dataset.tname + '&subjectname=' + e.currentTarget.dataset.subjectname,
     })
   }
 })

@@ -1,10 +1,11 @@
 <!--index.wxml-->
 <image src='../img/loginbg.jpg' class='loginbg'></image>
 <form class='login' bindsubmit='login'>
-  <picker value="collegeKey" range='{{college}}' bindchange="collegeSwitch">
+  <picker value="collegeKey" range='{{college}}' range-key='dname' bindchange="collegeSwitch">
     <view>
       <icon class='icon iconfont icon-study'></icon>
-      <input type='text' name="college" value='{{college[collegeKey]}}' placeholder='请选择学院' disabled='true'></input>
+      <input type='text' value='{{college[collegeKey].dname}}' placeholder='请选择学院' disabled='true'></input>
+      <input type='text' name="college" value='{{college[collegeKey].did}}' style='display:none;'></input>
     </view>
   </picker>
   <view>

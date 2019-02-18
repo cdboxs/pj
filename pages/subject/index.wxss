@@ -27,7 +27,7 @@
 }
 
 .subjectList {
-  width: 90%;
+  width: 92%;
   padding: 25rpx;
   background: #fff;
   margin: 0 auto;
@@ -37,13 +37,16 @@
   box-shadow: 1px 1px 5px 2px #eee;
 }
 .subjectList .title{
+  display: block;
+  width:100%;
   color:#555;
-  font-size: 32rpx;
+  font-size: 28rpx;
+  font-weight: bold;
 }
 .subjectList view{
   color:#555;
   margin:30rpx 0;
-  font-size: 30rpx;
+  font-size: 26rpx;
   display: flex;
   flex-flow: row;
   justify-content: space-around;
@@ -51,7 +54,7 @@
 }
 .subjectList view text{
   display: block;
-  width: 80%;
+  width: 90%;
 }
 .nextPre{
   width:100%;

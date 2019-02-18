@@ -3,7 +3,7 @@
  * */ 
 class Cd{
   constructor(){
-    this.httpUrl="";
+    this.httpUrl ="http://localhost/pjxt/public";
 
   }
 
@@ -17,17 +17,17 @@ class Cd{
   ajax(headerType,parameter){
     let promise=new Promise((resolve,reject)=>{
       if(headerType=="json"){
-        let header= {
+        var headers= {
           'Content-Type': 'application/json;'
         };
       }else if(headerType=="encode"){
-        let header={
+        var headers={
           'Content-Type': 'application/x-www-form-urlencoded;'
         };
       }
       wx.request({
         url:this.httpUrl+parameter.url,
-        header:header,
+        header:headers,
         method:parameter.type,
         data:parameter.data,
         dataType:'json',

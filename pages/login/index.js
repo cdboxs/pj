@@ -13,6 +13,21 @@ Page({
  
   onLoad: function () {
    that=this;
+    m.getDepart().then((res)=>{
+      if(res.data.code==200){
+        that.setData({
+          college:res.data.data
+        });
+      }
+    });
+  },
+  onShow(){
+    let userInfo=wx.getStorageSync('userInfo');
+    if (userInfo){
+      wx.redirectTo({
+        url: '../index/index',
+      })
+    }
   },
   collegeSwitch(e){
     that.setData({
@@ -29,13 +44,19 @@ Page({
     } else if (e.detail.value.userPwd == "") {
       m.showTost('密码不能为空');
       return;
-    } else if (e.detail.value.college!="河工软件学院" && e.detail.value.userName!="admin" && e.detail.value.userPwd!="admin"){
-      m.showTost('学号或密码错处');
-      return;
     }else{
-      wx.redirectTo({
-        url: '../index/index',
-      })
+      m.showLoading('正在登录');
+      m.mLogin({ did: e.detail.value.college, code: e.detail.value.userName, password: e.detail.value.userPwd}).then((res)=>{
+        if(res.data.code==200){
+          wx.setStorageSync('userInfo', res.data.data);
+          wx.hideLoading();
+          wx.redirectTo({
+            url: '../index/index',
+          })
+        }else if(res.data.code==400){
+          m.showTost(res.data.msg);
+        }
+      });
     }
   }
 

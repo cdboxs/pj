@@ -46,20 +46,50 @@ Page({
         height: app.globalData.windowHeight-e[0].height
       });
     });
+    that.setData({
+      types: options.types,
+      tname: options.tname,
+      subjectname: options.subjectname
+    });
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    m.testQuestions({ types:that.data.types }).then((res)=>{
+      //console.log(res);
+      if(res.data.code==200&&res.data.data.length!=0){
+        let items = [], options = [];
+        res.data.data.map((item, key)=>{
+          let t = {}, opsArr = [];
+          t.tNum=item.id;
+          t.title= item.ptittle;
+          t.pscore= item.pscore;
+          t.tList= item;
+          items.push(t);
+          opsArr[0] = { name: 'A', value: items[key].tList.A }
+          opsArr[1] = { name: 'B', value: items[key].tList.B }
+          opsArr[2] = { name: 'C', value: items[key].tList.C }
+          opsArr[3] = { name: 'D', value: items[key].tList.D }
+          items[key].tList = opsArr;
+        });
+    
+        that.setData({
+          items: items
+        });
+        console.log(items);
+        
+      }
+     
+    });
   },
 
   /**
@@ -95,6 +125,22 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  checkT(e){
+    wx.showToast({
+      title: '',
+      icon:'success',
+      mask:true,
+      duration:500
+    })
+    setTimeout(()=>{
+      let nextkey = that.data.tKey += 1;
+      that.setData({
+        tKey: nextkey
+      });
+    },600);
+   
+    // console.log(e);
   },
   next(){
     if (that.data.tKey == that.data.items.length) {
