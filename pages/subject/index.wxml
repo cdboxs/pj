@@ -10,7 +10,7 @@
       <text class='title'>{{tItem.title}}</text>
       <radio-group bindchange="checkT">
         <view wx:for="{{tItem.tList}}" wx:key="key" wx:for-item="item">
-          <radio value="{{item.name}}" checked="{{item.checked}}" />
+          <radio value="{{item.name}}" checked="{{item.checked}}"/>
           <text>{{item.name}}、{{item.value}}</text>
         </view>
       </radio-group>

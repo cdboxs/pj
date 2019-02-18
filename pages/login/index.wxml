@@ -13,7 +13,7 @@
   </view>
   <view>
     <icon class='icon iconfont icon-suoding'></icon>
-    <input type='text' name="userPwd" password='true' placeholder='请输入学号'></input>
+    <input type='text' name="userPwd" password='true' placeholder='请输入密码'></input>
   </view>
   <button form-type='submit'>登录</button>
 </form>
