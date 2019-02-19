@@ -42,11 +42,19 @@ class M extends Cd{
     return this.ajax('encode',parameter);
   }
  
-  ceptea(datas){
-    let parameter = {
-      url: '/api/ceptea',
-      type: 'POST',
-      data: datas
+  ceptea(types,datas){
+    if(types==0){
+      var parameter = {
+        url: '/api/ceptea',
+        type: 'POST',
+        data: datas
+      }
+    }else if(types==1){
+      var parameter = {
+        url: '/api/cepgui',
+        type: 'POST',
+        data: datas
+      }
     }
     return this.ajax('encode', parameter);
   }

@@ -16,7 +16,7 @@
       </radio-group>
     </view>
   </block>
-  <view wx:if="{{tKey==items.length}}" bindtap='ceptea' class='snedBtnStatus'>提交</view>
+  <view wx:if="{{tKey==items.length}}" data-types="{{types}}" bindtap='ceptea' class='snedBtnStatus'>提交</view>
 </view>
 
 <view class='nextPre'>

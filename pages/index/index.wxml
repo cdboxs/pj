@@ -16,15 +16,15 @@
   <block wx:for="{{t}}" wx:key="key">
     <view class="{{item.status=='已评教'?'active':''}}" data-types="0" data-id="{{item.id}}" data-tname="{{item.tname}}" data-subjectname="{{item.subjectname}}" bindtap="{{item.status=='已评教'?'':'linkSubJect'}}">
       <text>{{item.tname}}[{{item.subjectname}}]</text>
-      <text>{{item.status}}</text>
+      <text>{{item.status==1?'未评教':'已评教'}}</text>
     </view>
   </block>
 </view>
 <view class='teacherAssess' wx:if="{{navId==2}}">
   <block wx:for="{{d}}" wx:key="key">
-     <view class="{{item.status=='已评教'?'active':''}}" data-types="0" data-id="{{item.id}}" data-tname="{{item.tname}}" data-subjectname="{{item.subjectname}}" bindtap="{{item.status=='已评教'?'':'linkSubJect'}}">
+     <view class="{{item.status=='已评教'?'active':''}}" data-types="1" data-id="{{item.id}}" data-tname="{{item.tname}}" data-subjectname="{{item.subjectname}}" bindtap="{{item.status=='已评教'?'':'linkSubJect'}}">
       <text>{{item.tname}}[{{item.subjectname}}]</text>
-      <text>{{item.status}}</text>
+      <text>{{item.status==1?'未评教':'已评教'}}</text>
     </view>
   </block>
 </view>

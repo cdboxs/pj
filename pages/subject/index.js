@@ -46,8 +46,7 @@ Page({
    */
   onShow: function () {
     m.testQuestions({ types:that.data.types }).then((res)=>{
-      //console.log(res);
-      if(res.data.code==200&&res.data.data.length!=0){
+      if (res.data.code == 200 && res.data.data.length != 0 && that.data.types==0){
         let items = [], options = [];
         res.data.data.map((item, key)=>{
           let t = {}, opsArr = [];
@@ -62,15 +61,32 @@ Page({
           opsArr[3] = { name: 'D', value: items[key].tList.D, rule: 0.75 }
           items[key].tList = opsArr;
         });
-    
         that.setData({
           items: items,
           tLength: res.data.data.length
         });
-        console.log(items);
-        
+      } else if (res.data.code == 200 && res.data.data.length != 0 && that.data.types == 1){
+          //console.log(res);
+          let items = [], options = [];
+          res.data.data.map((item, key) => {
+            let t = {}, opsArr = [];
+            t.tNum = item.id;
+            t.title = item.gtittle;
+            t.pscore = item.score;
+            t.tList = item;
+            items.push(t);
+            opsArr[0] = { name: 'A', value: items[key].tList.a1, rule: 1.0 }
+            opsArr[1] = { name: 'B', value: items[key].tList.a2, rule: 0.95 }
+            opsArr[2] = { name: 'C', value: items[key].tList.a3, rule: 0.85 }
+            opsArr[3] = { name: 'D', value: items[key].tList.a4, rule: 0.75 }
+            items[key].tList = opsArr;
+          });
+          that.setData({
+            items: items,
+            tLength: res.data.data.length
+          });
+          //console.log(items);
       }
-     
     });
   },
 
@@ -133,17 +149,17 @@ Page({
       }, 600); 
       if (that.data.coreAll[e.currentTarget.dataset.optionid - 1]!=undefined){
         that.data.coreAll[e.currentTarget.dataset.optionid - 1]=e.detail.value;
-        console.log(that.data.coreAll);
+       // console.log(that.data.coreAll);
       }else{
         that.data.coreAll.push(e.detail.value);
-        console.log(that.data.coreAll[e.currentTarget.dataset.optionid - 1]);
-        console.log(that.data.coreAll);
+        //console.log(that.data.coreAll[e.currentTarget.dataset.optionid - 1]);
+        //console.log(that.data.coreAll);
       }
     }
    
   },
   next(e){
-    console.log(e.currentTarget.dataset.nowkey);
+    //console.log(e.currentTarget.dataset.nowkey);
     if (that.data.tKey == that.data.items.length) {
       m.showTost('暂无题目');
       return;
@@ -170,12 +186,22 @@ Page({
   },
   ceptea(e){
     m.showLoading('正在提交');
-    m.ceptea({ cid: wx.getStorageSync('userInfo').cid, tid: that.data.id, sid: wx.getStorageSync('userInfo').id, code: wx.getStorageSync('userInfo').code, option: that.data.coreAll }).then((res) => {
+    m.ceptea(that.data.types,{ cid: wx.getStorageSync('userInfo').cid, tid: that.data.id, sid: wx.getStorageSync('userInfo').id, code: wx.getStorageSync('userInfo').code, option: that.data.coreAll }).then((res) => {
+      //console.log(res);
       if (res.data.code == 200) {
-        wx.hideLoading();
-        wx.reLaunch({
-          url: '../index/index',
+        wx.showToast({
+          title: '评教成功',
+          icon: 'success',
+          mask: true,
+          duration: 800
         })
+        setTimeout(()=>{
+          wx.hideLoading();
+          wx.reLaunch({
+            url: '../index/index',
+          })
+        },1500);
+
       }else if(res.data.code==400){
         wx.hideLoading();
         m.showTost('请答完题目');

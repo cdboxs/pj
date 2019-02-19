@@ -36,7 +36,6 @@ Page({
     let userInfo=wx.getStorageSync('userInfo');
     if (userInfo){that.setData({ u: userInfo})};
     m.getTeacher({ did: userInfo.did, cid: userInfo.cid, types: 0, code: userInfo.code}).then((res)=>{
-      console.log(res);
       if(res.data.code==200){
         that.setData({
           t:res.data.data
@@ -44,7 +43,6 @@ Page({
       }
       return m.getTeacher({ did: userInfo.did, cid: userInfo.cid, types: 1, code: userInfo.code });
     }).then((res)=>{
-      console.log(res);
       if (res.data.code == 200) {
         that.setData({
           d: res.data.data
@@ -100,6 +98,7 @@ Page({
     that.setData({
       navId: e.currentTarget.dataset.navid
     });
+    that.onShow();
   },
   linkSubJect(e){
     wx.navigateTo({
