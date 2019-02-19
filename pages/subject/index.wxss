@@ -19,7 +19,7 @@
 
 .subject {
   display: flex;
-  flex-flow: row;
+  flex-flow: row wrap;
   justify-content: center;
   align-items: flex-start;
   box-sizing: border-box;
@@ -72,4 +72,14 @@
   color:#fff;
   font-size: 30rpx;
   text-align: center;
+}
+.snedBtnStatus{
+   width: 92%;
+  height: 100rpx;
+  color:#fff;
+  margin:0 auto;
+  background:#3682f4;
+  text-align: center;
+  line-height: 100rpx;
+  border-radius: 10rpx;
 }

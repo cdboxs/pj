@@ -44,6 +44,7 @@ Page({
       }
       return m.getTeacher({ did: userInfo.did, cid: userInfo.cid, types: 1, code: userInfo.code });
     }).then((res)=>{
+      console.log(res);
       if (res.data.code == 200) {
         that.setData({
           d: res.data.data
@@ -102,7 +103,7 @@ Page({
   },
   linkSubJect(e){
     wx.navigateTo({
-      url: '../subject/index?types=' + e.currentTarget.dataset.types + '&tname=' + e.currentTarget.dataset.tname + '&subjectname=' + e.currentTarget.dataset.subjectname,
+      url: '../subject/index?types=' + e.currentTarget.dataset.types + '&tname=' + e.currentTarget.dataset.tname + '&subjectname=' + e.currentTarget.dataset.subjectname + '&id=' + e.currentTarget.dataset.id,
     })
   }
 })

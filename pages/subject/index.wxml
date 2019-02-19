@@ -8,17 +8,19 @@
   <block wx:for="{{items}}" wx:key="key" wx:for-index="{{tKey}}" wx:for-item="tItem">
     <view class='subjectList' style="display:{{tItem.tNum==tKey?'block':'none'}};">
       <text class='title'>{{tKey}}、{{tItem.title}}</text>
-      <radio-group bindchange="checkT">
+      <radio-group bindchange="checkT" data-optionid="{{tItem.tNum}}" data-nowkey="{{tKey}}" data-zh="{{items.length}}">
         <view wx:for="{{tItem.tList}}" wx:key="key" wx:for-item="item">
-          <radio value="{{item.name}}" checked="{{item.checked}}"/>
+          <radio value="{{tItem.pscore*item.rule}}"/>
           <text>{{item.name}}、{{item.value}}</text>
         </view>
       </radio-group>
     </view>
   </block>
+  <view wx:if="{{tKey==items.length}}" bindtap='ceptea' class='snedBtnStatus'>提交</view>
 </view>
+
 <view class='nextPre'>
   <text bindtap='prev'>上一题</text>
   <text>{{tKey}}/{{items.length}}</text>
-  <text bindtap='next'>下一题</text>
+  <text bindtap='next' data-nowkey="{{tKey}}">下一题</text>
 </view>

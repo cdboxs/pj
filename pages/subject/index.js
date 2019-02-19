@@ -12,28 +12,8 @@ Page({
     width:app.globalData.windowWidth,
     height:'',
     tKey:1,
-    items:[
-      {
-        tNum:1,
-        title:'1、请问蹦鋇霸是妖精吗？',
-        tList: [
-          { name: 'A', value: '企事业单位及', checked: 'true' },
-          { name: 'B', value: '企事业单位及商铺可' },
-          { name: 'C', value: '企事业单位及商铺可将春联贴在本单位或商铺自身的门窗内外等其他易清理位置' },
-          { name: 'D', value: '企事业单位及商铺可将春联贴在本单位或商铺自身的门窗内外等其他易清理位置' },
-        ]
-      },
-      {
-        tNum: 2,
-        title: '2、请问孙悟空是谁的儿子？',
-        tList: [
-          { name: 'A', value: '企事业单位及', checked: 'true' },
-          { name: 'B', value: '企事业单位及商铺可' },
-          { name: 'C', value: '企事业单位及商铺可将春联贴在本单位或商铺自身的门窗内外等其他易清理位置' },
-          { name: 'D', value: '企事业单位及商铺可将春联贴在本单位或商铺自身的门窗内外等其他易清理位置' },
-        ]
-      }
-    ] 
+    coreAll:[],
+    items:[] 
   },
 
   /**
@@ -47,6 +27,7 @@ Page({
       });
     });
     that.setData({
+      id:options.id,
       types: options.types,
       tname: options.tname,
       subjectname: options.subjectname
@@ -75,15 +56,16 @@ Page({
           t.pscore= item.pscore;
           t.tList= item;
           items.push(t);
-          opsArr[0] = { name: 'A', value: items[key].tList.A }
-          opsArr[1] = { name: 'B', value: items[key].tList.B }
-          opsArr[2] = { name: 'C', value: items[key].tList.C }
-          opsArr[3] = { name: 'D', value: items[key].tList.D }
+          opsArr[0] = { name: 'A', value: items[key].tList.A, rule:1.0 }
+          opsArr[1] = { name: 'B', value: items[key].tList.B, rule: 0.95 }
+          opsArr[2] = { name: 'C', value: items[key].tList.C, rule: 0.85 }
+          opsArr[3] = { name: 'D', value: items[key].tList.D, rule: 0.75 }
           items[key].tList = opsArr;
         });
     
         that.setData({
-          items: items
+          items: items,
+          tLength: res.data.data.length
         });
         console.log(items);
         
@@ -127,39 +109,78 @@ Page({
 
   },
   checkT(e){
-    wx.showToast({
-      title: '',
-      icon:'success',
-      mask:true,
-      duration:500
-    })
-    setTimeout(()=>{
+    if (that.data.tKey <= that.data.tLength){
+      
+      wx.showToast({
+        title: '',
+        icon: 'success',
+        mask: true,
+        duration: 500
+      })
+      setTimeout(() => {
+        if (that.data.tKey == that.data.tLength) {
+          let nextkey = that.data.tKey;
+          that.setData({
+            tKey: nextkey
+          });
+        } else {
+          let nextkey = that.data.tKey += 1;
+          that.setData({
+            tKey: nextkey
+          });
+        }
+        
+      }, 600); 
+      if (that.data.coreAll[e.currentTarget.dataset.optionid - 1]!=undefined){
+        that.data.coreAll[e.currentTarget.dataset.optionid - 1]=e.detail.value;
+        console.log(that.data.coreAll);
+      }else{
+        that.data.coreAll.push(e.detail.value);
+        console.log(that.data.coreAll[e.currentTarget.dataset.optionid - 1]);
+        console.log(that.data.coreAll);
+      }
+    }
+   
+  },
+  next(e){
+    console.log(e.currentTarget.dataset.nowkey);
+    if (that.data.tKey == that.data.items.length) {
+      m.showTost('暂无题目');
+      return;
+    } else if (that.data.coreAll[e.currentTarget.dataset.nowkey-1] == undefined) {
+      m.showTost('请答题');
+      return;
+    }else{
       let nextkey = that.data.tKey += 1;
       that.setData({
         tKey: nextkey
       });
-    },600);
-   
-    // console.log(e);
-  },
-  next(){
-    if (that.data.tKey == that.data.items.length) {
-      m.showTost('暂无题目');
-      return;
     }
-    let nextkey=that.data.tKey+=1;
-    that.setData({
-      tKey:nextkey
-    });
   },
   prev() {
     if (that.data.tKey==1){
       m.showTost('暂无题目');
       return;
+    }else{
+      let prevkey = that.data.tKey -= 1;
+      that.setData({
+        tKey: prevkey
+      });
     }
-    let prevkey = that.data.tKey -= 1;
-    that.setData({
-      tKey: prevkey
+  },
+  ceptea(e){
+    m.showLoading('正在提交');
+    m.ceptea({ cid: wx.getStorageSync('userInfo').cid, tid: that.data.id, sid: wx.getStorageSync('userInfo').id, code: wx.getStorageSync('userInfo').code, option: that.data.coreAll }).then((res) => {
+      if (res.data.code == 200) {
+        wx.hideLoading();
+        wx.reLaunch({
+          url: '../index/index',
+        })
+      }else if(res.data.code==400){
+        wx.hideLoading();
+        m.showTost('请答完题目');
+      }
     });
+ 
   }
 })

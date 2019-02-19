@@ -33,7 +33,6 @@ class M extends Cd{
     return this.ajax('encode',parameter);
   }
 
-
   testQuestions(datas){
     let parameter={
       url:'/api/question',
@@ -43,5 +42,13 @@ class M extends Cd{
     return this.ajax('encode',parameter);
   }
  
+  ceptea(datas){
+    let parameter = {
+      url: '/api/ceptea',
+      type: 'POST',
+      data: datas
+    }
+    return this.ajax('encode', parameter);
+  }
 }
 export{M}
